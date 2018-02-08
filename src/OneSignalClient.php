@@ -15,7 +15,6 @@ class OneSignalClient
     protected $headers;
     protected $appId;
     protected $restApiKey;
-    protected $userAuthKey;
     protected $additionalParams;
 
     /**
@@ -51,11 +50,10 @@ class OneSignalClient
         return $this;
     }
 
-    public function __construct($appId, $restApiKey, $userAuthKey)
+    public function __construct()
     {
-        $this->appId = $appId;
-        $this->restApiKey = $restApiKey;
-        $this->userAuthKey = $userAuthKey;
+        $this->appId = env('ONESIGNAL_APP_ID');
+        $this->restApiKey = env('ONESIGNAL_REST_API_KEY');
 
         $this->client = new Client();
         $this->headers = ['headers' => []];
@@ -118,14 +116,19 @@ class OneSignalClient
         $this->sendNotificationCustom($params);
     }
 
-    public function sendNotificationUsingTags($message, $tags, $url = null, $data = null, $buttons = null, $schedule = null) {
+    public function sendNotificationUsingTags($title, $message, $tags, $url = null, $data = null, $buttons = null, $schedule = null) {
         $contents = array(
             "en" => $message
+        );
+
+        $headings = array(
+            "en" => $title,
         );
 
         $params = array(
             'app_id' => $this->appId,
             'contents' => $contents,
+            'headings' => $headings,
             'tags' => $tags,
         );
 
@@ -178,15 +181,20 @@ class OneSignalClient
         $this->sendNotificationCustom($params);
     }
 
-    public function sendNotificationToSegment($message, $segment, $url = null, $data = null, $buttons = null, $schedule = null) {
+    public function sendNotificationToSegment($title, $message, $segment, $url = null, $data = null, $buttons = null, $schedule = null) {
         $contents = array(
-            "en" => $message
+            "en" => $message,
+        );
+
+        $headings = array(
+            "en" => $title,
         );
 
         $params = array(
             'app_id' => $this->appId,
             'contents' => $contents,
-            'included_segments' => [$segment]
+            'headings' => $headings,
+            'included_segments' => [$segment],
         );
 
         if (isset($url)) {
