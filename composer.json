@@ -1,7 +1,7 @@
 {
-  "name": "berkayk/onesignal-laravel",
+  "name": "ravretto/onesignal-laravel",
   "description": "OneSignal Push Wrapper Laravel",
-  "keywords": ["onesignal", "webpush", "push", "laravel", "laravel 5"],
+  "keywords": ["onesignal", "webpush", "push", "laravel", "laravel 5.5"],
   "type": "library",
   "require": {
     "php": ">=5.4.0",
@@ -27,7 +27,11 @@
     {
       "name": "Maykonn Welington Candido",
       "email": "maykonn@outlook.com"
-    }
+    },
+	{
+	 "name": "Rafael Hall",
+	 "email": "rafaelhall@outlook.com"
+	}
   ],
   "minimum-stability": "dev",
   "prefer-stable": true 
